@@ -38,7 +38,7 @@
 
     <!-- <button id="globaltagbutton" v-for="item in globaltaglist">{{item.name}}</button> -->
     
-    <!--  <button v-if="configurable" id="json-button"><i class="fas dl fa-download"></i> <a href="https://roots-network-69742.firebaseio.com/chromes" target=_blank rel="noopener noreferrer">Export json</a></button> -->
+    <!--  <button v-if="configurable" id="json-button"><i class="fas dl fa-download"></i> <a href="https://roots-network-69742.firebaseio.com/jungle" target=_blank rel="noopener noreferrer">Export json</a></button> -->
 
     <div id="submit-form" v-if='show'>
       <div id="input-container">
@@ -267,7 +267,7 @@
                 this.toggleShow()
 
                 // post to firebase
-                this.$http.post('https://roots-network-69742.firebaseio.com/chromes.json', newbookmark).then(function (data) {
+                this.$http.post('https://roots-network-69742.firebaseio.com/jungle.json', newbookmark).then(function (data) {
                   console.log(data)
                 })
             },
@@ -286,14 +286,14 @@
                     app.bookmarks.splice(linkLocation, 1)
                     app.bookmarks.unshift(link);
                     link.favorited = !link.favorited;
-                    this.$http.put('https://roots-network-69742.firebaseio.com/chromes.json', this.bookmarks).then(function (data) {
+                    this.$http.put('https://roots-network-69742.firebaseio.com/jungle.json', this.bookmarks).then(function (data) {
                         console.log('PUT FAV')
                     })
 
                 }
             },
             put: function (link) {
-                this.$http.put('https://roots-network-69742.firebaseio.com/chromes.json', this.bookmarks).then(function (data) {
+                this.$http.put('https://roots-network-69742.firebaseio.com/jungle.json', this.bookmarks).then(function (data) {
                     alert('Database Updated Succesfully');
                 })
             },
@@ -303,7 +303,7 @@
                 app.bookmarks.splice(linkLocation, 1)
                 app.bookmarks.splice(link.lastlocation, 0, link)
                 link.favorited = !link.favorited;
-                this.$http.put('https://roots-network-69742.firebaseio.com/chromes.json', this.bookmarks).then(function (data) {
+                this.$http.put('https://roots-network-69742.firebaseio.com/jungle.json', this.bookmarks).then(function (data) {
                     console.log('PUT UNFAV')
                 })
             },
@@ -311,8 +311,8 @@
                 let linkLocation = app.bookmarks.indexOf(link)
                 if (linkLocation !== -1 && confirm("Are you sure you want to delete this bookmark?")) {
                     app.bookmarks.splice(linkLocation, 1)
-                    this.$http.delete('https://roots-network-69742.firebaseio.com/chromes/' + link.id + '/.json', link.id).then(function (data) {
-                        console.log('https://roots-network-69742.firebaseio.com/chromes/' + link.id + '/.json');
+                    this.$http.delete('https://roots-network-69742.firebaseio.com/jungle/' + link.id + '/.json', link.id).then(function (data) {
+                        console.log('https://roots-network-69742.firebaseio.com/jungle/' + link.id + '/.json');
                     })
                 }
             },
@@ -378,7 +378,7 @@
         },
 
         created() {
-            this.$http.get('https://roots-network-69742.firebaseio.com/chromes.json').then(function (data) {
+            this.$http.get('https://roots-network-69742.firebaseio.com/jungle.json').then(function (data) {
                 // this.bookmarks=data.body;
                 return data.json()
             }).then(function (data) {
